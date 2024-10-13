@@ -66,6 +66,11 @@ export const getProtectedData = async (): Promise<string> => {
     {
       method: "GET",
       credentials: "include",
+      /**
+       * it may take a while for the server to respond in case of access token is expired
+       * because it need to get new access token and refresh token
+       */
+      timeout: 5000,
       onResponse(ctx) {
         handleResponce(ctx, nuxtApp);
       },

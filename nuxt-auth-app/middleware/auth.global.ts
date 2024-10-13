@@ -1,15 +1,20 @@
 export default defineNuxtRouteMiddleware((to, from) => {
   const nuxtApp = useNuxtApp();
-  const accessToken = useCookie("accessToken");
+  const refreshToken = useCookie("refreshToken");
 
+  /**
+   * SSR only
+   * We dont have refresh token on the client side because is stored in Http-Only cookie
+   * Redirect to login if no refresh token
+   */
   if (nuxtApp.ssrContext) {
-    if (!accessToken.value && to.path !== "/login") {
-      console.log("Redirecting to login");
+    if (!refreshToken.value && to.path !== "/login") {
       return nuxtApp.$router.replace("/login");
     }
   }
 
-  if (accessToken.value && to.path === "/login") {
+  // Redirect to home if already logged in
+  if (refreshToken.value && to.path === "/login") {
     return navigateTo("/");
   }
 });
