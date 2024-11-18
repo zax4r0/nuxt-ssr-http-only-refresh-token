@@ -9,7 +9,7 @@ flowchart TD
 
     C --> E[Set accessToken and refreshToken in cookies]
 
-    F -->|Access Protected Route| G[User sends accessToken in cookie to /protected]
+    F -->|Access Protected Route| G[Browser sends accessToken in cookie to /protected]
     G --> H{Backend verifies accessToken}
     H -->|Valid| I[Allow access to protected data]
     H -->|Invalid| J[Check refreshToken]
