@@ -8,7 +8,6 @@ flowchart TD
     B -->|Invalid| D[Send 401 Invalid Credentials]
 
     C --> E[Set accessToken and refreshToken in cookies]
-    E --> F[Frontend receives tokens and stores them in cookies]
 
     F -->|Access Protected Route| G[User sends accessToken in cookie to /protected]
     G --> H{Backend verifies accessToken}
